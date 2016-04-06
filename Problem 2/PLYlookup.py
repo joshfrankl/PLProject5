@@ -41,7 +41,10 @@ def p_start(t):
 
 def p_code(t):
     'code : CODE'
-    print("Building code " +  t[1] + " is " + campus_buildings[t[1].upper()])
+    try:
+        print("Building code " +  t[1] + " is " + campus_buildings[t[1].upper()])
+    except KeyError:
+        print("Error: building code " + t[1] + " does not exist at the UT campus or is not in the database")
 
 def p_error(t):
     if t == None:
