@@ -26,6 +26,6 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> start","S'",1,None,None,None),
-  ('start -> code','start',1,'p_start','PLYstarter.py',49),
-  ('code -> CODE','code',1,'p_code','PLYstarter.py',53),
+  ('start -> code','start',1,'p_start','PLYlookup.py',39),
+  ('code -> CODE','code',1,'p_code','PLYlookup.py',43),
 ]
