@@ -1,18 +1,15 @@
-""" This will parse the data from the unix command echo "Header1 is this~Header2 and that~~Data 1.0~Data 2.0" | tr "~" "\n"
-which is:
-Header1 is this
-Header2 and that
-
-Data 1.0
-Data 2.0
-"""
-
 tokens = ('CODE', )
 # Add in remaining building codes from http://www.utexas.edu/maps/main/buildings/
-campus_buildings = {'BAT' : 'Batts Hall', 'CBA' : 'McCombs School of Business', 'CAL' : 'Calhoun Hall', 'GDC' : 'Gates Dell Complex'}
-
+campus_buildings = {'ACA' : 'Academic Annex', 'ADH' : 'Almetris Duren Hall', 'AFP' : 'Athletic Fields Pavilion', 'AHG' : 'Anna Hiss Gymnasium', 'ANB' : 'Arno Nowotny Building', 'AND' : 'Andrews Dormitory', 'ARC' : 'Animal Resources Center', 'ART' : 'Art Building and Museum', 'ATT' : 'AT&T Executive Education and Conference Center',
+                    'BAT' : 'Batts Hall', 'BEL' : 'L. Theo Bellmont Hall', 'BEN' : 'Benedict Hall', 'BHD' : 'Brackenridge Hall Dormitory', 'BIO' : 'Biological Laboratories', 'BLD' : 'Blanton Dormitory', 'BMA' : 'Blanton Museum of Art', 'BMC' : 'Belo Center for New Media', 'BME' : 'Biomedical Engineering Building', 'BOT' : 'Biological Greenhouse', 'BRB' : 'Bernard and Audre Rapoport Building', 'BRG' : 'Brazos Garage', 'BTL' : 'Battle Hall', 'BUR' : 'Burdine Hall', 'BWY' : '2616 Wichita',
+                    'CAL' : 'Calhoun Hall', 'CBA' : 'McCombs School of Business', 'CCG' : 'Conference Center Garage', 'CCJ' : 'John B. Connally Center for Justice', 'CDA' : 'Comal Child Development Center Annex', 'CDL' : 'Collections Deposit Library', 'CEE' : 'Continuing Engineering Education', 'CCF' : 'Caven Lacrosse and Sports Center at Clark Field', 'CLA' : 'Liberal Arts Building', 'CLK' : 'Caven Clark Field Support Building', 'CMA' : 'Jesse H. Jones Communication Center - Building A',
+                    'CMB' : 'Jesse H. Jones Communication Center - Building B', 'CML' : '	Child Development Center', 'COM' : 'Computation Center', 'CPE' : 'Chemical and Petroleum Engineering Building', 'CRB' : 'Computational Resource Building', 'CRD' : 'Carothers Dormitory', 'CRH' : 'Creekside Residence Hall', 'CS3' : 'Chilling Station No. 3', 'CS4' : 'Chilling Station No. 4', 'CS5' : 'Chilling Station No. 5',
+                    'DEV' : 'Development Office Building', 'DCP' : 'Denton A. Cooley Pavilion', 'DFA' : 'E. William Doty Fine Arts Building', 'DFF' : '	UFCU Disch-Falk Field',
+                    'EAS' : 'Edgar A. Smith Building', 'ECJ' : 'Ernest Cockrell Jr. Hall', 'ENS' : 'Engineering-Science Building', 'EPS' : 'E. P. Schoch Building', 'ERC' : 'Frank C. Erwin Jr. Special Events Center', 'ESS' : 'Engineering Student Services Building', 'ETC' : 'Engineering Teaching Center II',
+                    'FAC' : 'Peter T. Flawn Academic Center', 'FC1' : 'Facilities Complex Building 1', 'FC2' : 'Facilities Complex Building 2', 'FC3' : 'Facilities Complex Building 3', 'FC4' : 'Facilities Complex Building 4', 'FC5' : 'Facilities Complex Building 5', 'FC6' : 'Facilities Complex Building 6', 'FC7' : 'Facilities Complex Building 7', 'FC8' : 'Facilities Complex Building 8', 'FDF' : 'Frank Denius Fields', 'FDH' : 'J. Frank Dobie House', 'FNT' : 'Larry R. Faulkner Nano Science and Technology Building', 'FPC' : 'OFPC Field Staff Office',
+                    'GAR' : 'Garrison Hall', 'GDC' : 'Gates Dell Complex', 'GEA' : 'Mary E. Gearing Hall', 'GEB' : 'Dorothy L. Gebauer Building', 'GOL' : 'Goldsmith Hall', 'GRE' : 'Gregory Gymnasium', 'GSB' : 'Graduate School of Business Building', 'GUG' : 'UT Administration Parking Garage', 'GWB' : 'Gordon-White Building'
+}
 # Tokens
-# Use these regular expressions. If input matches this, turn all of it into the specified token
 t_CODE  = r'^[A-Za-z]{3}' # A valid building code is 3 letters (case insensitive)
 
 # Ignored characters
@@ -44,7 +41,7 @@ def p_code(t):
     try:
         print("Building code " +  t[1] + " is " + campus_buildings[t[1].upper()])
     except KeyError:
-        print("Error: building code " + t[1] + " does not exist at the UT campus or is not in the database")
+        print("Building code " + t[1] + " does not exist at the UT campus or is not in the database")
 
 def p_error(t):
     if t == None:
@@ -62,4 +59,4 @@ while True:
         break
     parser.parse(s)
 
-# To run the parser do the following in a terminal window: echo "CBA~CAL" | tr "~" "\n" | grep -v '^\s*$' | python PLYlookup.py
+# To run the parser do the following in a terminal window: cat plyParserInputs/parser.out | python PLYlookup.py
