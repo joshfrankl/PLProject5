@@ -1,6 +1,7 @@
 package frankl;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ListComprehension {
     public static void main(String[] args) {
@@ -60,6 +61,17 @@ public class ListComprehension {
         // select * from emp where salary > 1500 and id > 12;
         System.out.println("select * from emp where salary > 1500 and id > 12;");
         emp.stream().filter(e -> emp.indexOf(e) > 0 && Integer.parseInt(e.get(7).toString()) > 1500 && Integer.parseInt(e.get(0).toString()) > 12).forEach(e -> {System.out.println(e);});
+
+        System.out.println();
+
+        // select dept_id, avg(salary) from emp group by dept_id;
+        System.out.println("select dept_id, avg(salary) from emp group by dept_id;");
+        emp.stream().filter(e -> emp.indexOf(e) > 0).collect(Collectors.groupingBy(e -> e.get(9).toString())).entrySet().stream().map(kv -> kv.getValue())
+                .forEach(employeeList -> {
+                    double averageSalary = employeeList.stream().mapToDouble(e -> Double.parseDouble(e.get(7).toString())).average().getAsDouble();
+                    String dept_id = employeeList.get(0).get(9).toString();
+                    System.out.println(dept_id + " " + averageSalary);
+                });
 
         System.out.println();
 
