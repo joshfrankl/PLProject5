@@ -3,17 +3,22 @@ Created by PLY version 3.8 (http://www.dabeaz.com/ply)
 Grammar
 
 Rule 0     S' -> start
-Rule 1     start -> code
-Rule 2     code -> CODE
+Rule 1     start -> line
+Rule 2     line -> IP - - DATE TIME COMMAND CODE
 
 Terminals, with rules where they appear
 
+-                    : 2 2
 CODE                 : 2
+COMMAND              : 2
+DATE                 : 2
+IP                   : 2
+TIME                 : 2
 error                : 
 
 Nonterminals, with rules where they appear
 
-code                 : 1
+line                 : 1
 start                : 0
 
 Parsing method: LALR
@@ -21,30 +26,72 @@ Parsing method: LALR
 state 0
 
     (0) S' -> . start
-    (1) start -> . code
-    (2) code -> . CODE
+    (1) start -> . line
+    (2) line -> . IP - - DATE TIME COMMAND CODE
 
-    CODE            shift and go to state 3
+    IP              shift and go to state 1
 
-    start                          shift and go to state 1
-    code                           shift and go to state 2
+    start                          shift and go to state 2
+    line                           shift and go to state 3
 
 state 1
+
+    (2) line -> IP . - - DATE TIME COMMAND CODE
+
+    -               shift and go to state 4
+
+
+state 2
 
     (0) S' -> start .
 
 
 
-state 2
-
-    (1) start -> code .
-
-    $end            reduce using rule 1 (start -> code .)
-
-
 state 3
 
-    (2) code -> CODE .
+    (1) start -> line .
 
-    $end            reduce using rule 2 (code -> CODE .)
+    $end            reduce using rule 1 (start -> line .)
+
+
+state 4
+
+    (2) line -> IP - . - DATE TIME COMMAND CODE
+
+    -               shift and go to state 5
+
+
+state 5
+
+    (2) line -> IP - - . DATE TIME COMMAND CODE
+
+    DATE            shift and go to state 6
+
+
+state 6
+
+    (2) line -> IP - - DATE . TIME COMMAND CODE
+
+    TIME            shift and go to state 7
+
+
+state 7
+
+    (2) line -> IP - - DATE TIME . COMMAND CODE
+
+    COMMAND         shift and go to state 8
+
+
+state 8
+
+    (2) line -> IP - - DATE TIME COMMAND . CODE
+
+    CODE            shift and go to state 9
+
+
+state 9
+
+    (2) line -> IP - - DATE TIME COMMAND CODE .
+
+    $end            reduce using rule 2 (line -> IP - - DATE TIME COMMAND CODE .)
 

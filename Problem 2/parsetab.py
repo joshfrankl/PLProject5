@@ -5,9 +5,9 @@ _tabversion = '3.8'
 
 _lr_method = 'LALR'
 
-_lr_signature = '0D5452DBBC255A3B41AE7A2E1143DE9D'
+_lr_signature = '8B0734D6A6E1F617C098BDA525B3131C'
     
-_lr_action_items = {'CODE':([0,],[3,]),'$end':([1,2,3,],[0,-1,-2,]),}
+_lr_action_items = {'CODE':([8,],[9,]),'IP':([0,],[1,]),'-':([1,4,],[4,5,]),'COMMAND':([7,],[8,]),'TIME':([6,],[7,]),'DATE':([5,],[6,]),'$end':([2,3,9,],[0,-1,-2,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'start':([0,],[1,]),'code':([0,],[2,]),}
+_lr_goto_items = {'start':([0,],[2,]),'line':([0,],[3,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,6 +26,6 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> start","S'",1,None,None,None),
-  ('start -> code','start',1,'p_start','PLYlookup.py',39),
-  ('code -> CODE','code',1,'p_code','PLYlookup.py',43),
+  ('start -> line','start',1,'p_start','PLYlog.py',39),
+  ('line -> IP - - DATE TIME COMMAND CODE','line',7,'p_line','PLYlog.py',43),
 ]
